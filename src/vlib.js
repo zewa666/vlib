@@ -1,3 +1,28 @@
+var mountedContent = null;
+var mainContent = null;
+var mainModel = null;
+var renderedComp = null;
+
+/* eslint-disable no-unused-vars */
+function VLibRender(content, model, selector) {
+  
+  /* eslint-enable no-unused-vars */  
+
+  mainContent = content;
+  renderedComp = content(model);
+  mainModel = model;
+
+  if (mountedContent) {
+    mountedContent.parentNode.replaceChild(renderedComp, mountedContent);
+    mountedContent = renderedComp;
+  } else {
+    if (!selector) {
+      throw "Selector missing for mount point";
+    }
+    mountedContent = document.querySelector(selector).appendChild(renderedComp);    
+  } 
+}
+
 function typeError(exp, msg) {
   if(exp) {
     throw msg;    
@@ -23,6 +48,11 @@ function processAttributes(elem, attrs) {
         for (let [styleEntry, styleVal] of Object.entries(value)) {
           elem.style[styleEntry] = styleVal;
         }
+      } else if (key.indexOf("on") === 0 && typeof value === "function") {       
+        elem.addEventListener(key.replace("on", ""), () => {
+          value();
+          VLibRender(mainContent, mainModel);
+        }, false);
       } else {
         elem.setAttribute(key, value);
       }
@@ -73,21 +103,3 @@ function VLibCreate(tagName, attrs, content, ...children) {
     }
   }
 });
-
-var mountedContent = null;
-
-/* eslint-disable no-unused-vars */
-function VLibRender(content, selector) {
-  
-  /* eslint-enable no-unused-vars */
-  if (!selector) {
-    throw "Selector missing for mount point";
-  }
-
-  if (mountedContent) {
-    mountedContent.parentNode.replaceChild(content, mountedContent);
-    mountedContent = content;
-  } else {
-    mountedContent = document.querySelector(selector).appendChild(content);    
-  } 
-}
