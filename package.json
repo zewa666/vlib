@@ -1,0 +1,19 @@
+{
+  "name": "vlib",
+  "version": "1.0.0",
+  "description": "A VanillaJS View Library",
+  "main": "src/vlib.js",
+  "scripts": {
+    "start": "concurrently --kill-others \"babel --watch demo.js -o dist/demo.js\" \"http-server\""
+  },
+  "author": "Vildan Softic",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.18.0",
+    "concurrently": "^3.1.0",
+    "eslint": "^3.12.2"
+  }
+}
