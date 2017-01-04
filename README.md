@@ -5,6 +5,8 @@ and native DOM Operations.
 
 As a bonus it leverages babel-transform-jsx to make use of the JSX syntax if preferred.
 
+It uses [diffhtml](https://www.npmjs.com/package/diffhtml) for performant HTML updates.
+
 ## How to run the example
 
 In your terminal run:
@@ -13,6 +15,6 @@ In your terminal run:
 // install dependencies
 npm install
 
-// run babel + http-server
+// run babel/webpack + http-server
 npm start
 ```
