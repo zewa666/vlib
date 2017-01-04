@@ -1,26 +1,33 @@
+import { element as diffhtmlElement } from "diffhtml";
+
 var mountedContent = null;
 var mainContent = null;
 var mainModel = null;
+var mainSelector = null;
+var mainId = null;
 var renderedComp = null;
 
-/* eslint-disable no-unused-vars */
-function VLibRender(content, model, selector) {
-  
-  /* eslint-enable no-unused-vars */  
+
+export function VLibRender(content, model, selector, id) {
+  if (mountedContent) {
+    diffhtmlElement(document.getElementById(mainId), mainContent(mainModel));
+    return;
+  }
+
+  if (!selector) {
+    throw "Selector missing for mount point";
+  }
+
+  if (!id) {
+    throw "Id of root missing";
+  }
 
   mainContent = content;
   renderedComp = content(model);
   mainModel = model;
-
-  if (mountedContent) {
-    mountedContent.parentNode.replaceChild(renderedComp, mountedContent);
-    mountedContent = renderedComp;
-  } else {
-    if (!selector) {
-      throw "Selector missing for mount point";
-    }
-    mountedContent = document.querySelector(selector).appendChild(renderedComp);    
-  } 
+  mainId = id;
+  mainSelector = selector;
+  mountedContent = document.querySelector(mainSelector).appendChild(renderedComp);       
 }
 
 function typeError(exp, msg) {
@@ -51,7 +58,7 @@ function processAttributes(elem, attrs) {
       } else if (key.indexOf("on") === 0 && typeof value === "function") {       
         elem.addEventListener(key.replace("on", ""), () => {
           value();
-          VLibRender(mainContent, mainModel);
+          VLibRender();
         }, false);
       } else {
         elem.setAttribute(key, value);
@@ -60,7 +67,7 @@ function processAttributes(elem, attrs) {
   }
 }
 
-function VLibCreate(tagName, attrs, content, ...children) {
+export function VLibCreate(tagName, attrs, content, ...children) {
   typeError(!tagName, "No valid tagName provided");
 
   let elem = document.createElement(tagName.toUpperCase());
@@ -93,9 +100,11 @@ function VLibCreate(tagName, attrs, content, ...children) {
   return elem;
 }
 
+export let VLibTag = {};
+
 ["h1", "h2", "h3", "div", "p", "br",
  "table", "thead", "tbody", "th", "tr", "td"].map( (tagName) => {
-  window[tagName] = function(attrs, content, ...children) {
+  VLibTag[tagName] = function(attrs, content, ...children) {
     if (children && children.length > 0) {
       return VLibCreate(tagName, attrs, content, ...children);
     } else {

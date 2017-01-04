@@ -1,6 +1,12 @@
-/* global VLibRender, table, thead, th, tbody, tr, td, div, h2, p, br */
 /** @jsx VLibCreate */
 
+import {
+  VLibCreate,
+  VLibRender,
+  VLibTag
+} from "./src/vlib";
+
+let {table, thead, th, tbody, tr, td, div, h2, p, br} = VLibTag;
 
 let model = {
   "primary": {
@@ -36,7 +42,7 @@ const renderTable = (data) => {
 
 let jsx = (props) => <div>
   <h2>Some JSX generated content.</h2>
-  <p>{props.text}</p>
+  <p id="differ">{props.text}</p>
   <button onclick={() => alert("test")}>Click here</button>
   <button onclick={props.clickHandler}>Click here 2</button>
 </div>
@@ -53,5 +59,4 @@ let content = (props) => div({"id": props.primary.mountId},
   jsx(props.jsxComponent)
 );
 
-
-VLibRender(content, model, "body");
+VLibRender(content, model, "body", model.primary.mountId);
