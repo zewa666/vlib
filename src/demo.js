@@ -1,4 +1,5 @@
 import * as Redux from "redux";
+import devToolsEnhancer from "remote-redux-devtools";
 
 import {
   ACTION_UPDATE_JSXCOMPONENT,
@@ -42,7 +43,10 @@ let model = {
   }
 };
 
-store = Redux.createStore(rootReducer, model);
+/* eslint-disable no-underscore-dangle */
+store = Redux.createStore(rootReducer, model, devToolsEnhancer({ "realtime": true }));
+
+/* eslint-enable no-underscore-dangle */  
 
 function render() {
   const currentState = store.getState();
