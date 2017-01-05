@@ -31,7 +31,14 @@ let model = {
         "type": ACTION_UPDATE_JSXCOMPONENT,
         "value": { "text": "foo" }
       });
-    }
+    },
+    "sayHelloToHandler": (e) => { 
+      store.dispatch({
+        "type": ACTION_UPDATE_JSXCOMPONENT,
+        "value": { "sayHelloTo": e.target.value }
+      });
+    },
+    "sayHelloTo": null
   }
 };
 
