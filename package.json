@@ -4,12 +4,16 @@
   "description": "A VanillaJS View Library",
   "main": "src/vlib.js",
   "scripts": {
-    "start": "concurrently --kill-others \"webpack --config=webpack.config.js --optimize-minimize --watch\" \"http-server\" "
+    "start": "concurrently --kill-others \"webpack --config=webpack.config.js --optimize-minimize --watch\" \"http-server\" ",
+    "server": "webpack --config=webpack.config.js --optimize-minimize && webpack --config=webpack.backend.js && node dist/server.js"
   },
   "author": "Vildan Softic",
   "license": "MIT",
   "dependencies": {
     "diffhtml": "^0.9.2",
+    "express": "^4.14.0",
+    "jsdom": "^9.9.1",
+    "object.entries": "^1.0.4",
     "redux": "^3.6.0"
   },
   "devDependencies": {

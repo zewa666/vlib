@@ -13,7 +13,8 @@ import {
 import { content } from "./main";
 
 let store = null;
-let model = {
+
+export let model = {
   "primary": {
     "mountId": "main-content",
     "greetingHeader": "Hello World !!!",
@@ -43,8 +44,16 @@ let model = {
   }
 };
 
+
+
 /* eslint-disable no-underscore-dangle */
-store = Redux.createStore(rootReducer, model, devToolsEnhancer({ "realtime": true }));
+let initialState = model;
+
+if (window.__PRELOADED_STATE__) {
+ initialState = Object.assign({}, window.__PRELOADED_STATE__, model);
+}
+
+store = Redux.createStore(rootReducer, initialState, devToolsEnhancer({ "realtime": true }));
 
 /* eslint-enable no-underscore-dangle */  
 
@@ -56,6 +65,3 @@ function render() {
 
 store.subscribe(render);
 render();
-
-
-
