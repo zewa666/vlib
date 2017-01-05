@@ -21,7 +21,8 @@ let model = {
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]
-    ]
+    ],
+    "random": Math.random(0, 1)
   },
   "jsxComponent": {
     "text": "Jaddaa jaddaa jadaa",

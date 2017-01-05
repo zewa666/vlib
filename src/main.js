@@ -25,6 +25,10 @@ export const jsx = (props) => <div>
   <p id="differ">{props.text}</p>
   <button onclick={() => alert("test")}>Click here</button>
   <button onclick={props.clickHandler}>Click here 2</button>
+  <br />
+  <br />
+  <input type="text" onchange={(e) => props.sayHelloTo = e.target.value} />
+  <button onclick={() => alert(props.sayHelloTo)}>Say hello</button>
 </div>
 
 export const content = (props) => div({"id": props.primary.mountId},
@@ -34,7 +38,7 @@ export const content = (props) => div({"id": props.primary.mountId},
   p({"style": props.primary.styles}, "Das ist ein Test"),
   renderTable(props.primary.tableData),
   p({}, true),
-  p(null, Math.random(0, 1)),
+  p(null, props.primary.random),
   p(null, null),
   jsx(props.jsxComponent)
 );
