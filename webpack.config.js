@@ -1,4 +1,7 @@
 const webpack = require("webpack");
+const glob = require("glob");
+
+console.log(glob.sync("./src/*.js"));
 
 module.exports = {
   devtool: 'source-map',
@@ -16,9 +19,9 @@ module.exports = {
     ]
   },
   entry: {
-    vendor: ['diffhtml'],
-    vlib: './src/vlib.js',
-    app: './demo.js'
+    vendor: ['diffhtml', 'redux'],
+    vlib: './lib/vlib.js',
+    app: glob.sync("./src/*.js")
   },
   output: {
     filename: '[name].js',
