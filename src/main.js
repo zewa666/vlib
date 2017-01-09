@@ -5,6 +5,8 @@ import {
   VLibTag
 } from "../lib/vlib";
 
+import { FunctionalComponent } from "./functional.component";
+
 let {table, thead, th, tbody, tr, td, div, h2, p} = VLibTag;
 
 export const renderTable = (data) => {
@@ -40,5 +42,8 @@ export const content = (props) => div({"id": props.primary.mountId},
   p({}, true),
   p(null, props.primary.random),
   p(null, null),
-  jsx(props.jsxComponent)
+  <hr style={ {marginBottom: "50px", marginTop: "50px"} } />,
+  jsx(props.jsxComponent),
+  <hr style={ {marginBottom: "50px", marginTop: "50px"} } />,
+  FunctionalComponent({ firstName: "Vildan", lastName: "Softic", birthDay: "01.12.1985", emailAddr: "zewa666@gmail.com"})
 );
