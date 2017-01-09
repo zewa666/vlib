@@ -5,7 +5,7 @@
   "main": "src/vlib.js",
   "scripts": {
     "start": "concurrently --kill-others \"webpack --config=webpack.config.js --optimize-minimize --watch\" \"http-server\" ",
-    "server": "webpack --config=webpack.config.js --optimize-minimize && webpack --config=webpack.backend.js && node dist/server.js"
+    "server": "webpack --config=webpack.config.js --optimize-minimize && node dist/server.js"
   },
   "author": "Vildan Softic",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "concurrently": "^3.1.0",
     "eslint": "^3.12.2",
     "http-server": "^0.9.0",
+    "nodemon": "^1.11.0",
     "remote-redux-devtools": "^0.5.7",
     "webpack": "^2.1.0-beta.28"
   }
