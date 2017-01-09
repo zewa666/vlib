@@ -21,7 +21,7 @@ export const renderTable = (data) => {
 };
 
 export const jsx = (props) => <div>
-  <h2>Some JSX generated content.</h2>
+  <h2 class="red">Some JSX generated content.</h2>
   <p id="differ">{props.text}</p>
   <button onclick={() => alert("test")}>Click here</button>
   <button onclick={props.clickHandler}>Click here 2</button>
