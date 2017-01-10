@@ -1,91 +1,97 @@
+/* global require, module, __dirname */
+
 const webpack = require("webpack");
 const glob = require("glob");
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
-var nodeModules = {};
-fs.readdirSync('node_modules')
-  .filter(function(x) {
-    return ['.bin'].indexOf(x) === -1;
+let nodeModules = {};
+
+fs.readdirSync("node_modules")
+  .filter((x) => {
+    return [".bin"].indexOf(x) === -1;
   })
-  .forEach(function(mod) {
-    nodeModules[mod] = 'commonjs ' + mod;
+  .forEach((mod) => {
+    nodeModules[mod] = `commonjs ${mod}`;
   });
 
 module.exports = [
 {
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         query: {
-          presets: ['es2015'],
-          plugins: ['transform-react-jsx']
+          presets: ["es2015"],
+          plugins: ["transform-react-jsx"]
         }
       }
     ]
   },
   entry: {
-    vendor: ['diffhtml', 'redux'],
-    vlib: './lib/vlib.js',
+    vendor: ["diffhtml", "redux"],
+    vlib: "./lib/vlib.js",
     app: glob.sync("./src/*.js")
   },
   output: {
-    filename: '[name].js',
-    path: __dirname + '/dist'
+    filename: "[name].js",
+    path: path.join(__dirname, "/dist")
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.bundle.js'
+      name: "vendor",
+      filename: "vendor.bundle.js"
     })
   ],
-  stats: { colors: true, reasons: true }
+  stats: {
+    colors: true,
+    reasons: true
+  }
 },
 {
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         query: {
-          presets: ['es2015'],
-          plugins: ['transform-react-jsx']
+          presets: ["es2015"],
+          plugins: ["transform-react-jsx"]
         }
       }
     ]
   },
-  entry: './server.js',
-  target: 'node',
+  entry: "./server.js",
+  target: "node",
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'server.js'
+    path: path.join(__dirname, "dist"),
+    filename: "server.js"
   },
   externals: nodeModules
 },
 {
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         query: {
-          presets: ['es2015'],
-          plugins: ['transform-react-jsx']
+          presets: ["es2015"],
+          plugins: ["transform-react-jsx"]
         }
       }
     ]
   },
-  entry: 'webpack.tests.js',
+  entry: "./webpack.tests.js",
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'test.js'
+    path: path.join(__dirname, "dist"),
+    filename: "test.js"
   }
 }];
