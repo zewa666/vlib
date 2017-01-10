@@ -7,7 +7,8 @@ import {
 } from "./store";
 
 import {
-  VLibRender  
+  VLibRender,
+  ActionCreatorPrerenderDone  
 } from "../lib/vlib";
 
 import { content } from "./main";
@@ -65,3 +66,5 @@ function render() {
 
 store.subscribe(render);
 render();
+
+store.dispatch(ActionCreatorPrerenderDone);

@@ -1,3 +1,7 @@
+import {
+  ACTION_PRERENDER_DONE
+} from "../lib/vlib";
+
 export const ACTION_UPDATE_JSXCOMPONENT = "UPDATE_JSXCOMPONENT";
 
 export const rootReducer = (state = {}, action) => {  
@@ -6,6 +10,8 @@ export const rootReducer = (state = {}, action) => {
       return Object.assign({}, state, {
         "jsxComponent": Object.assign({}, state.jsxComponent, action.value) 
       });
+    case ACTION_PRERENDER_DONE:
+      return Object.assign({}, state, action.value);
     default: 
       return state;
   }

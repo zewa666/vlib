@@ -14,8 +14,9 @@ global.window = document.defaultView;
 
 const App = require("./src/main");
 const Demo = require("./src/demo");
-
 const appDom = App.content(Demo.model);
+
+Demo.model.isPrerendered = true;
 
 let html = fs.readFileSync("demo.html", "utf8")
   .replace("// [prerendered model]", `window.__PRELOADED_STATE__ = ${JSON.stringify(Demo.model)};`)

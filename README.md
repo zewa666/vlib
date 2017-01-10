@@ -30,3 +30,15 @@ npm run server
 ```
 
 This will serve the app from the node application server.
+
+## Notes on server side prerendering
+
+When the server renders the markup it will send it as part of the initial request. As such the user
+can immediatelly see the rendered UI. One problem though is that all event listeners aren't attached
+as they'd need client side processing.
+As such the frontend needs to rebuild the page immediatelly to attach all those handlers. In order to distinguish
+the intial prerender the sent initial state will contain a prop `isPrerendered` set to `true`.
+After setting up the store and performing the first render, the app should dispatch a new action `ActionCreatorPrerenderDone`
+exported by the VLib library and toggle `isPrerendered` to `false`.
+
+This way, inspecting the state history, one now can clearly differentiate the `@@INIT` and `prerendering done` state updates.

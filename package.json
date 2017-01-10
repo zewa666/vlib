@@ -1,6 +1,6 @@
 {
   "name": "vlib",
-  "version": "3.4.1",
+  "version": "3.5.0",
   "description": "A VanillaJS View Library",
   "main": "src/vlib.js",
   "scripts": {
