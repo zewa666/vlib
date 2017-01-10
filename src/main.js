@@ -1,7 +1,7 @@
 /** @jsx VLibCreate */
 
 import {
-  VLibCreate,
+  VLibCreate, // eslint-disable-line
   VLibTag
 } from "../lib/vlib";
 
@@ -42,8 +42,19 @@ export const content = (props) => div({"id": props.primary.mountId},
   p({}, true),
   p(null, props.primary.random),
   p(null, null),
-  <hr style={ {marginBottom: "50px", marginTop: "50px"} } />,
+  <hr style={ {
+    marginBottom: "50px",
+    marginTop: "50px"
+  }} />,
   jsx(props.jsxComponent),
-  <hr style={ {marginBottom: "50px", marginTop: "50px"} } />,
-  FunctionalComponent({ firstName: "Vildan", lastName: "Softic", birthDay: "01.12.1985", emailAddr: "zewa666@gmail.com"})
+  <hr style={ {
+    marginBottom: "50px",
+    marginTop: "50px"}
+  } />,
+  FunctionalComponent({
+    firstName: "Vildan",
+    lastName: "Softic",
+    birthDay: "01.12.1985",
+    emailAddr: "zewa666@gmail.com"
+  })
 );

@@ -1,7 +1,7 @@
 /** @jsx VLibCreate */
 
 import {
-  VLibCreate
+  VLibCreate // eslint-disable-line
 } from "../lib/vlib";
 
 export const FunctionalComponent = ({
@@ -14,9 +14,9 @@ export const FunctionalComponent = ({
   const createInputElement = (name, value) => {
     return (
       <div>
-        <label for={'txt_' + name.toLowerCase() }>{name}</label>
+        <label for={ `txt_${name.toLowerCase()}` }>{name}</label>
         <br />
-        <input type="text" id={'txt_' + name.toLowerCase() } value={value} /><br /><br />
+        <input type="text" id={ `txt_${name.toLowerCase()}` } value={value} /><br /><br />
       </div>
     )
   };
@@ -25,13 +25,13 @@ export const FunctionalComponent = ({
     alert("Oki doki")
   };
 
-  const view = (<div>
+  const view = <div>
     { createInputElement("Firstname", firstName) }
     { createInputElement("Lastname", lastName) }
     { createInputElement("Birthday", birthDay) }
     { createInputElement("Email", emailAddr) }
     <button onclick={ handleClick } >Click</button>
-  </div>);
+  </div>;
 
   return view;
 }
