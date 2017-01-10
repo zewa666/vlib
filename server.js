@@ -18,7 +18,8 @@ const Demo = require("./src/demo");
 const appDom = App.content(Demo.model);
 
 let html = fs.readFileSync("demo.html", "utf8")
-  .replace("// [prerendered model]", `window.__PRELOADED_STATE__ = ${JSON.stringify(Demo.model)};`);
+  .replace("// [prerendered model]", `window.__PRELOADED_STATE__ = ${JSON.stringify(Demo.model)};`)
+  .replace("<!-- prerendered ui -->", appDom.outerHTML);
 
 // a little web server
 const express = require("express");
