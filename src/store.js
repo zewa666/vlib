@@ -16,3 +16,19 @@ export const rootReducer = (state = {}, action) => {
       return state;
   }
 }
+
+export const ActionCreators = {
+  clickHandler: () => {
+    return {
+      "type": ACTION_UPDATE_JSXCOMPONENT,
+      "value": { "text": "foo" }
+    }
+  },
+  sayHelloToHandler: (sayHelloTo) => {
+    return {
+      "type": ACTION_UPDATE_JSXCOMPONENT,
+      "value": { sayHelloTo }
+    }
+  }
+}
+

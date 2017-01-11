@@ -2,13 +2,13 @@ import * as Redux from "redux";
 import devToolsEnhancer from "remote-redux-devtools";
 
 import {
-  ACTION_UPDATE_JSXCOMPONENT,
-  rootReducer
+  rootReducer,
+  ActionCreators
 } from "./store";
 
 import {
   VLibRender,
-  ActionCreatorPrerenderDone  
+  prerenderingDone  
 } from "../lib/vlib";
 
 import { content } from "./main";
@@ -30,24 +30,15 @@ export let model = {
   "jsxComponent": {
     "text": "Jaddaa jaddaa jadaa",
     "clickHandler": () => { 
-      store.dispatch({
-        "type": ACTION_UPDATE_JSXCOMPONENT,
-        "value": { "text": "foo" }
-      });
+      store.dispatch(ActionCreators.clickHandler());
     },
     "sayHelloToHandler": (e) => { 
-      store.dispatch({
-        "type": ACTION_UPDATE_JSXCOMPONENT,
-        "value": { "sayHelloTo": e.target.value }
-      });
+      store.dispatch(ActionCreators.sayHelloToHandler(e.target.value));
     },
     "sayHelloTo": null
   }
 };
 
-
-
-/* eslint-disable no-underscore-dangle */
 let initialState = model;
 
 if (window.__PRELOADED_STATE__) {
@@ -56,8 +47,6 @@ if (window.__PRELOADED_STATE__) {
 
 store = Redux.createStore(rootReducer, initialState, devToolsEnhancer({ "realtime": true }));
 
-/* eslint-enable no-underscore-dangle */  
-
 function render() {
   const currentState = store.getState();
 
@@ -65,6 +54,9 @@ function render() {
 }
 
 store.subscribe(render);
-render();
 
-store.dispatch(ActionCreatorPrerenderDone);
+if (window.__PRELOADED_STATE__) {
+  store.dispatch(prerenderingDone);
+} else {
+  render();
+}
