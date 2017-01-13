@@ -55,8 +55,8 @@ function render() {
 
 store.subscribe(render);
 
+render();
+
 if (window.__PRELOADED_STATE__) {
   store.dispatch(prerenderingDone);
-} else {
-  render();
 }
