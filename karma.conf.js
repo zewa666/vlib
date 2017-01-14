@@ -1,6 +1,6 @@
 /* global require, module */
 
-const webpackConfig = require("./webpack.config.js");
+const webpackConfig = require("./webpack.config.test.js");
 
 module.exports = function(config) {
   config.set({
@@ -18,7 +18,7 @@ module.exports = function(config) {
       "webpack.tests.js": ["webpack", "sourcemap"],
     },
 
-    webpack: webpackConfig[2],
+    webpack: webpackConfig,
     client: {
       // log console output in our test console
       captureConsole: true
