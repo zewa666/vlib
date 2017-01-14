@@ -1,12 +1,13 @@
 {
   "name": "vlib",
-  "version": "3.5.4",
+  "version": "3.5.5",
   "description": "A VanillaJS View Library",
   "main": "src/vlib.js",
   "scripts": {
     "start": "concurrently --kill-others \"webpack --config=webpack.config.frontend.js --optimize-minimize --watch\" \"http-server\" ",
     "server": "webpack --config=webpack.config.frontend.js --optimize-minimize && webpack --config=webpack.config.backend.js && node dist/server.js",
-    "test": "karma start"
+    "test": "karma start",
+    "lint": "eslint **/*.js --quiet --ignore-path .gitignore & exit 0"
   },
   "author": "Vildan Softic",
   "license": "MIT",
