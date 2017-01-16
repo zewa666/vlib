@@ -10,6 +10,8 @@ Features:
 * Redux is used to have a single-state propagation and dev-controllable rerenders
 * Redux DevTools for nice state monitoring
 * Server rendering with initial state propagation
+* Karma/Jasmine for Unit Testing
+* Webpack for build/bundle automation
 
 ## How to run the example
 
