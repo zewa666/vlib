@@ -13,8 +13,7 @@ fs.readdirSync("node_modules")
     nodeModules[mod] = `commonjs ${mod}`;
   });
 
-module.exports = [
-{
+module.exports = {
   devtool: "inline-source-map",
   target: "node",
   module: {
@@ -40,4 +39,4 @@ module.exports = [
     colors: true,
     reasons: true
   }
-}];
+};

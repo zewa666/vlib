@@ -14,8 +14,7 @@ function isExternal(module) {
   return userRequest.indexOf("node_modules") >= 0;
 }
 
-module.exports = [
-{
+module.exports = {
   devtool: "source-map",
   module: {
     loaders: [
@@ -57,25 +56,4 @@ module.exports = [
     colors: true,
     reasons: true
   }
-},
-{
-  devtool: "inline-source-map",
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader",
-        query: {
-          presets: ["es2015"],
-          plugins: ["transform-react-jsx"]
-        }
-      }
-    ]
-  },
-  entry: "./webpack.tests.js",
-  output: {
-    path: path.join(__dirname, "dist"),
-    filename: "test.js"
-  }
-}];
+};
